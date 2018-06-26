@@ -49,6 +49,7 @@ FOOTERTEXT = 'Loc: Naaldwijk'
 
 
 def draw_head(text, pos):
+    """Draw a outline with a text in it on top of display"""
     for pix in range(0, 128, 1):
         oled.pixel(pix, 0, 1)
         oled.pixel(pix, 14, 1)
@@ -62,6 +63,7 @@ def draw_head(text, pos):
 
 
 def draw_footer(text, pos):
+    """Draw a outline with a text in it on bottom of display"""
     for pix in range(0, 128, 1):
         oled.pixel(pix, 52, 1)
         oled.pixel(pix, 63, 1)
@@ -76,6 +78,7 @@ def draw_footer(text, pos):
 
 
 def clear_data_area(start, end):
+    """Clear the section of diplay where data is printend."""
     for i in range(start, end, 1):
         for j in range(0, 128, 1):
             oled.pixel(j, i, 0)
@@ -94,10 +97,11 @@ while True:
     # ------------------------------------------------------------
     temp_string = '{:.1f} degrees C'.format(si7021.temperature)
     hum_string = 'Humidity {:.1f} %'.format(si7021.relative_humidity)
-    print(temp_string)
-    print(hum_string)
-    clear_data_area(20, 50)
-    oled.text(temp_string, 5, 20)
-    oled.text(hum_string, 2, 35)
-    oled.show()
+
+    # print(temp_string)            # Debuging to terminal
+    # print(hum_string)             # Debuging to terminal
+    clear_data_area(20, 50)         # Clear space for putting results
+    oled.text(temp_string, 5, 20)   # Put temperature
+    oled.text(hum_string, 2, 35)    # Put humidity
+    oled.show()                     # Show it all
     time.sleep(5)
